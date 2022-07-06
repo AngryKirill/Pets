@@ -24,7 +24,7 @@ namespace Pets.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public Pet Get(int id)
+        public Pet GetById(int id)
         {
             var pet = _context.Pets.Find(id);
             if (pet == null)
@@ -40,7 +40,7 @@ namespace Pets.API.Controllers
         }
 
         [HttpPut]
-        public void Put(Pet pet)
+        public void Update(Pet pet)
         {
             _context.Pets.Update(pet);
             _context.SaveChanges();
