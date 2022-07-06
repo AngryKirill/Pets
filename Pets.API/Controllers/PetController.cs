@@ -18,55 +18,51 @@ namespace Pets.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pet>>> GetAll()
+        public IEnumerable<Pet> GetAll()
         {
-            return Ok(await _context.Pets.ToListAsync());
+            return _context.Pets.ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Pet>>> Get(int id)
+        public Pet Get(int id)
         {
-            var pet = await _context.Pets.FindAsync(id);
-            if(pet == null)
-                return NotFound();
-            return Ok(pet);
+            var pet = _context.Pets.Find(id);
+            if (pet == null)
+                throw new ArgumentNullException("Object cannot be null", nameof(pet));
+            return pet;
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<Pet>>> Post(Pet pet)
+        public void Post(Pet pet)
         {
             _context.Pets.Add(pet);
-            await _context.SaveChangesAsync();
-            return Ok(pet);
+            _context.SaveChanges();
         }
 
         [HttpPut]
-        public async Task<ActionResult<IEnumerable<Pet>>> Put(Pet request)
+        public void Put(Pet request)
         {
-            var dbPet = await _context.Pets.FindAsync(request.Id);
+            var dbPet = _context.Pets.Find(request.Id);
             if (dbPet == null)
-                return BadRequest("Pet not found");
+                throw new ArgumentNullException("Object cannot be null", nameof(dbPet));
 
             dbPet.Age = request.Age;
             dbPet.Weight = request.Weight;
             dbPet.Name = request.Name;
 
             _context.Entry(dbPet).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return Ok(dbPet);
+            _context.SaveChanges();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IEnumerable<Pet>>> Delete(int id)
+        public void Delete(int id)
         {
-            var dbPet = await _context.Pets.FindAsync(id);
+            var dbPet = _context.Pets.Find(id);
             if(dbPet == null)
-                return BadRequest("Pet not found");
+                throw new ArgumentNullException("Object cannot be null", nameof(dbPet));
 
             _context.Pets.Remove(dbPet);
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            _context.SaveChanges();
         }
     }
 }

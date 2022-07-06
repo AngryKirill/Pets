@@ -12,7 +12,6 @@ builder.Services.AddSwaggerGen();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<PetsContext>(options => options.UseSqlServer(connection));
 
 var app = builder.Build();
