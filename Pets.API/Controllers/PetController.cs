@@ -33,16 +33,16 @@ namespace Pets.API.Controllers
         }
 
         [HttpPost]
-        public void Post(Pet pet)
+        public void Add(Pet pet)
         {
             _context.Pets.Add(pet);
             _context.SaveChanges();
         }
 
         [HttpPut]
-        public void Put(Pet request)
+        public void Put(Pet pet)
         {
-            _context.Update(request);
+            _context.Pets.Update(pet);
             _context.SaveChanges();
         }
 
