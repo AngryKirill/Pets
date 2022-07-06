@@ -42,15 +42,7 @@ namespace Pets.API.Controllers
         [HttpPut]
         public void Put(Pet request)
         {
-            var dbPet = _context.Pets.Find(request.Id);
-            if (dbPet == null)
-                throw new ArgumentNullException("Object cannot be null", nameof(dbPet));
-
-            dbPet.Age = request.Age;
-            dbPet.Weight = request.Weight;
-            dbPet.Name = request.Name;
-
-            _context.Entry(dbPet).State = EntityState.Modified;
+            _context.Update(request);
             _context.SaveChanges();
         }
 
