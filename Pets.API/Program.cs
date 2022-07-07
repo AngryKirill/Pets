@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Pets.API.Contexts;
+using Pets.DAL.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 

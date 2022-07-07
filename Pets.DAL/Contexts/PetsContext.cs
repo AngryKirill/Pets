@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pets.API.Entities;
+using Pets.DAL.Entities;
 
-namespace Pets.API.Contexts
+namespace Pets.DAL.Contexts
 {
     public class PetsContext : DbContext
     {

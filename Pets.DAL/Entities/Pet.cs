@@ -1,4 +1,4 @@
-﻿namespace Pets.API.Entities
+﻿namespace Pets.DAL.Entities
 {
     public class Pet
     {

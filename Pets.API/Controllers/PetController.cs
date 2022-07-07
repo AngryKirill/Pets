@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Pets.API.Contexts;
-using Pets.API.Entities;
+using Pets.DAL.Contexts;
+using Pets.DAL.Entities;
 
 namespace Pets.API.Controllers
 {
@@ -56,5 +56,6 @@ namespace Pets.API.Controllers
             _context.Pets.Remove(dbPet);
             _context.SaveChanges();
         }
+
     }
 }
