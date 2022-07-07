@@ -18,13 +18,13 @@ namespace Pets.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Pet> GetAll()
+        public IEnumerable<PetEntity> GetAll()
         {
             return _context.Pets.ToList();
         }
 
         [HttpGet("{id}")]
-        public Pet GetById(int id)
+        public PetEntity GetById(int id)
         {
             var pet = _context.Pets.Find(id);
             if (pet == null)
@@ -33,14 +33,14 @@ namespace Pets.API.Controllers
         }
 
         [HttpPost]
-        public void Add(Pet pet)
+        public void Add(PetEntity pet)
         {
             _context.Pets.Add(pet);
             _context.SaveChanges();
         }
 
         [HttpPut]
-        public void Update(Pet pet)
+        public void Update(PetEntity pet)
         {
             _context.Pets.Update(pet);
             _context.SaveChanges();

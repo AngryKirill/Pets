@@ -1,6 +1,6 @@
 ﻿namespace Pets.DAL.Entities
 {
-    public class Pet
+    public class PetEntity
     {
         public string Name { get; set; }
         public int Age { get; set; }
