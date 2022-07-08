@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pets.BLL.Interfaces
 {
-    internal interface IPetService
+    public interface IPetService
     {
         IEnumerable<Pet> GetAll();
         Pet GetById(int id);
