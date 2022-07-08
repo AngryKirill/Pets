@@ -15,40 +15,38 @@ namespace Pets.BLL.Services
     {
         IPetRepository Repository { get; set; }
 
-        public PetService(IPetRepository repository)
+        private readonly Mapper _mapper;
+
+        public PetService(IPetRepository repository, Mapper mapper)
         {
             Repository = repository;
+            _mapper = mapper;
         }
 
         public IEnumerable<Pet> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PetEntity, Pet>()).CreateMapper();
-            return mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.GetAll());
+            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.GetAll());
         }
 
         public Pet GetById(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PetEntity, Pet>()).CreateMapper();
-            return mapper.Map<PetEntity, Pet>(Repository.GetById(id));
+            return _mapper.Map<PetEntity, Pet>(Repository.GetById(id));
         }
 
         public IEnumerable<Pet> Find(Func<Pet, bool> predicate)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PetEntity, Pet>()).CreateMapper();
-            var newPredicate = mapper.Map<Func<Pet, bool>, Func<PetEntity, bool>>(predicate);
-            return mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.Find(newPredicate));
+            var newPredicate = _mapper.Map<Func<Pet, bool>, Func<PetEntity, bool>>(predicate);
+            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.Find(newPredicate));
         }
 
         public void Create(Pet item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PetEntity, Pet>()).CreateMapper();
-            Repository.Create(mapper.Map<Pet, PetEntity>(item));
+            Repository.Create(_mapper.Map<Pet, PetEntity>(item));
         }
 
         public void Update(Pet item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PetEntity, Pet>()).CreateMapper();
-            Repository.Update(mapper.Map<Pet, PetEntity>(item));
+            Repository.Update(_mapper.Map<Pet, PetEntity>(item));
         }
 
         public void Delete(int id)
