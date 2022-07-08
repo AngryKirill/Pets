@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Pets.DAL.Repositories
 {
-    public class PetRepository: IPetRepository<PetEntity>
+    public class PetRepository: IPetRepository
     {
         private readonly PetsContext _context;
 
@@ -32,11 +32,13 @@ namespace Pets.DAL.Repositories
         public void Create(PetEntity pet)
         {
             _context.Pets.Add(pet);
+            _context.SaveChanges();
         }
 
         public void Update(PetEntity pet)
         {
             _context.Entry(pet).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public IEnumerable<PetEntity> Find(Func<PetEntity, Boolean> predicate)
@@ -49,6 +51,7 @@ namespace Pets.DAL.Repositories
             PetEntity pet = _context.Pets.Find(id);
             if (pet != null)
                 _context.Pets.Remove(pet);
+            _context.SaveChanges();
         }
     }
 }
