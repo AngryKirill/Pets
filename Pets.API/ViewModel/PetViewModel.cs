@@ -1,6 +1,6 @@
-﻿namespace Pets.API.Entities
+﻿namespace Pets.API.ViewModel
 {
-    public class Pet
+    public class PetViewModel
     {
         public string Name { get; set; }
         public int Age { get; set; }

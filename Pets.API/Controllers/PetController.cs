@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Pets.API.Contexts;
-using Pets.API.Entities;
+using Pets.BLL.Interfaces;
+using Pets.API.ViewModel;
+using Pets.BLL.Models;
 
 namespace Pets.API.Controllers
 {
@@ -10,51 +11,49 @@ namespace Pets.API.Controllers
     [ApiController]
     public class PetController : ControllerBase
     {
-        private readonly PetsContext _context;
+        private readonly IPetService _service;
 
-        public PetController(PetsContext context)
+        private readonly Mapper _mapper;
+
+        public PetController(IPetService service, Mapper mapper)
         {
-            _context = context; 
+            _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<Pet> GetAll()
+        public IEnumerable<PetViewModel> GetAll()
         {
-            return _context.Pets.ToList();
+            var allPets = _service.GetAll();
+            return _mapper.Map<IEnumerable<Pet>, IEnumerable<PetViewModel>>(allPets);
         }
 
         [HttpGet("{id}")]
-        public Pet GetById(int id)
+        public PetViewModel GetById(int id)
         {
-            var pet = _context.Pets.Find(id);
-            if (pet == null)
-                throw new ArgumentNullException("Object cannot be null", nameof(pet));
-            return pet;
+            var pet = _service.GetById(id);
+            return _mapper.Map<Pet, PetViewModel>(pet);
         }
 
         [HttpPost]
-        public void Add(Pet pet)
+        public void Create(PetViewModel item)
         {
-            _context.Pets.Add(pet);
-            _context.SaveChanges();
+            var pet = _mapper.Map<PetViewModel, Pet>(item);
+            _service.Create(pet);
         }
 
         [HttpPut]
-        public void Update(Pet pet)
+        public void Update(PetViewModel item)
         {
-            _context.Pets.Update(pet);
-            _context.SaveChanges();
+            var pet = _mapper.Map<PetViewModel, Pet>(item);
+            _service.Update(pet);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var dbPet = _context.Pets.Find(id);
-            if(dbPet == null)
-                throw new ArgumentNullException("Object cannot be null", nameof(dbPet));
-
-            _context.Pets.Remove(dbPet);
-            _context.SaveChanges();
+            _service.Delete(id);
         }
+
     }
 }
