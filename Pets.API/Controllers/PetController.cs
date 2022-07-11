@@ -24,27 +24,29 @@ namespace Pets.API.Controllers
         [HttpGet]
         public IEnumerable<PetViewModel> GetAll()
         {
-            return _mapper
-                .Map<IEnumerable<Pet>, IEnumerable<PetViewModel>>(_service
-                .GetAll());
+            var allPets = _service.GetAll();
+            return _mapper.Map<IEnumerable<Pet>, IEnumerable<PetViewModel>>(allPets);
         }
 
         [HttpGet("{id}")]
         public PetViewModel GetById(int id)
         {
-            return _mapper.Map<Pet, PetViewModel>(_service.GetById(id));
+            var pet = _service.GetById(id);
+            return _mapper.Map<Pet, PetViewModel>(pet);
         }
 
         [HttpPost]
         public void Create(PetViewModel item)
         {
-            _service.Create(_mapper.Map<PetViewModel, Pet>(item));
+            var pet = _mapper.Map<PetViewModel, Pet>(item);
+            _service.Create(pet);
         }
 
         [HttpPut]
         public void Update(PetViewModel item)
         {
-            _service.Update(_mapper.Map<PetViewModel, Pet>(item));
+            var pet = _mapper.Map<PetViewModel, Pet>(item);
+            _service.Update(pet);
         }
 
         [HttpDelete("{id}")]
