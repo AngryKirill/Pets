@@ -11,44 +11,46 @@ namespace Pets.API.Controllers
     [ApiController]
     public class PetController : ControllerBase
     {
-        IPetService Service { get; set; }
+        private readonly IPetService _service;
 
         private readonly Mapper _mapper;
 
         public PetController(IPetService service, Mapper mapper)
         {
-            Service = service;
+            _service = service;
             _mapper = mapper;
         }
 
         [HttpGet]
         public IEnumerable<PetViewModel> GetAll()
         {
-            return _mapper.Map<IEnumerable<Pet>, IEnumerable<PetViewModel>>(Service.GetAll());
+            return _mapper
+                .Map<IEnumerable<Pet>, IEnumerable<PetViewModel>>(_service
+                .GetAll());
         }
 
         [HttpGet("{id}")]
         public PetViewModel GetById(int id)
         {
-            return _mapper.Map<Pet, PetViewModel>(Service.GetById(id));
+            return _mapper.Map<Pet, PetViewModel>(_service.GetById(id));
         }
 
         [HttpPost]
         public void Create(PetViewModel item)
         {
-            Service.Create(_mapper.Map<PetViewModel, Pet>(item));
+            _service.Create(_mapper.Map<PetViewModel, Pet>(item));
         }
 
         [HttpPut]
         public void Update(PetViewModel item)
         {
-            Service.Update(_mapper.Map<PetViewModel, Pet>(item));
+            _service.Update(_mapper.Map<PetViewModel, Pet>(item));
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            Service.Delete(id);
+            _service.Delete(id);
         }
 
     }

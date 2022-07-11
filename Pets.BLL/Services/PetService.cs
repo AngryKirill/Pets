@@ -11,47 +11,47 @@ using System.Threading.Tasks;
 
 namespace Pets.BLL.Services
 {
-    internal class PetService: IPetService
+    public class PetService: IPetService
     {
-        IPetRepository Repository { get; set; }
+        private readonly IPetRepository _repository;
 
         private readonly Mapper _mapper;
 
         public PetService(IPetRepository repository, Mapper mapper)
         {
-            Repository = repository;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public IEnumerable<Pet> GetAll()
         {
-            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.GetAll());
+            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(_repository.GetAll());
         }
 
         public Pet GetById(int id)
         {
-            return _mapper.Map<PetEntity, Pet>(Repository.GetById(id));
+            return _mapper.Map<PetEntity, Pet>(_repository.GetById(id));
         }
 
         public IEnumerable<Pet> Find(Func<Pet, bool> predicate)
         {
             var newPredicate = _mapper.Map<Func<Pet, bool>, Func<PetEntity, bool>>(predicate);
-            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(Repository.Find(newPredicate));
+            return _mapper.Map<IEnumerable<PetEntity>, IEnumerable<Pet>>(_repository.Find(newPredicate));
         }
 
         public void Create(Pet item)
         {
-            Repository.Create(_mapper.Map<Pet, PetEntity>(item));
+            _repository.Create(_mapper.Map<Pet, PetEntity>(item));
         }
 
         public void Update(Pet item)
         {
-            Repository.Update(_mapper.Map<Pet, PetEntity>(item));
+            _repository.Update(_mapper.Map<Pet, PetEntity>(item));
         }
 
         public void Delete(int id)
         {
-            Repository.Delete(id);
+            _repository.Delete(id);
         }
     }   
 }
