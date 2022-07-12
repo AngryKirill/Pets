@@ -15,9 +15,9 @@ namespace Pets.BLL.Services
     {
         private readonly IPetRepository _repository;
 
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public PetService(IPetRepository repository, Mapper mapper)
+        public PetService(IPetRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

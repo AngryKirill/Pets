@@ -13,9 +13,9 @@ namespace Pets.API.Controllers
     {
         private readonly IPetService _service;
 
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public PetController(IPetService service, Mapper mapper)
+        public PetController(IPetService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
