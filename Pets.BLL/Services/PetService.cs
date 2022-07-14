@@ -30,7 +30,12 @@ namespace Pets.BLL.Services
 
         public Pet GetById(int id)
         {
-            return _mapper.Map<PetEntity, Pet>(_repository.GetById(id));
+            PetEntity pet = _repository.GetById(id);
+
+            if(pet == null)
+                throw new ArgumentNullException("Object doesn't exist");
+            else
+                return _mapper.Map<PetEntity, Pet>(pet);
         }
 
         public IEnumerable<Pet> Find(Func<Pet, bool> predicate)
@@ -51,7 +56,12 @@ namespace Pets.BLL.Services
 
         public void Delete(int id)
         {
-            _repository.Delete(id);
+            PetEntity pet = _repository.GetById(id);
+
+            if(pet == null)
+                throw new ArgumentNullException("Object doesn't exist");
+            else
+                _repository.Delete(id);
         }
     }   
 }

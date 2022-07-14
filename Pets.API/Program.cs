@@ -1,4 +1,5 @@
 using Pets.API.Mappers;
+using Pets.API.Middlewares;
 using Pets.BLL.Infraestructure;
 using Pets.BLL.Mappers;
 using Pets.DAL.Infraestructure;
@@ -24,7 +25,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandler>();
 
 app.UseAuthorization();
 
