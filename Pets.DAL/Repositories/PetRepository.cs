@@ -2,11 +2,6 @@
 using Pets.DAL.Contexts;
 using Pets.DAL.Entities;
 using Pets.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pets.DAL.Repositories
 {
