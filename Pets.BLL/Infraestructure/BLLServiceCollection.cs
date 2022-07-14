@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Pets.BLL.Interfaces;
 using Pets.BLL.Services;
 using System;
@@ -7,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pets.BLL.Infraestructure
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class BLLServiceCollection
     {
-        public static IServiceCollection AddBLLServices(this IServiceCollection services)
+        public static void AddBLLServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IPetService, PetService>();
-            return services;
+            services.AddDALServices(configuration);
         }
     }
 }

@@ -1,8 +1,6 @@
 using Pets.API.Mappers;
 using Pets.API.Middlewares;
-using Pets.BLL.Infraestructure;
 using Pets.BLL.Mappers;
-using Pets.DAL.Infraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddBLLServices()
-    .AddDALServices(builder.Configuration);
+builder.Services.AddBLLServices(builder.Configuration);
 
 builder.Services.AddCors();
 
