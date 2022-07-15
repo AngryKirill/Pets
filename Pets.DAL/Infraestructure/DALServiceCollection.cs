@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddDALServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IPetRepository, PetRepository>();
+            services.AddScoped<IFoodRepository, FoodRepository>();
             services.AddDbContext<PetsContext>(options => 
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
