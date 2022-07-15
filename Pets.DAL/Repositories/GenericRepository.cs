@@ -6,7 +6,7 @@ namespace Pets.DAL.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly PetsContext _context;
+        protected readonly PetsContext _context;
 
         private readonly DbSet<TEntity> _dbSet;
 
@@ -16,34 +16,34 @@ namespace Pets.DAL.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _dbSet;
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public void Create(TEntity item)
+        public virtual void Create(TEntity item)
         {
             _dbSet.Add(item);
             _context.SaveChanges();
         }
 
-        public void Update(TEntity item)
+        public virtual void Update(TEntity item)
         {
             _context.Entry(item).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate)
+        public virtual IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate)
         {
             return _dbSet.Where(predicate).ToList();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             TEntity item = _dbSet.Find(id);
             _dbSet.Remove(item);
