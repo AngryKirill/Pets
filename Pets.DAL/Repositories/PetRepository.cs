@@ -1,51 +1,52 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pets.DAL.Contexts;
-using Pets.DAL.Entities;
 using Pets.DAL.Interfaces;
-
+    
 namespace Pets.DAL.Repositories
 {
-    public class PetRepository: IPetRepository
+    public class PetRepository<TEntity>: IPetRepository<TEntity> where TEntity: class
     {
         private readonly PetsContext _context;
+
+        private readonly DbSet<TEntity> _dbSet;
 
         public PetRepository(PetsContext context)
         {
             _context = context;
+            _dbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<PetEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
-            return _context.Pets;
+            return _dbSet;
         }
 
-        public PetEntity GetById(int id)
+        public TEntity GetById(int id)
         {
-            return _context.Pets.Find(id);
+            return _dbSet.Find(id);
         }
 
-        public void Create(PetEntity pet)
+        public void Create(TEntity item)
         {
-            _context.Pets.Add(pet);
+            _dbSet.Add(item);
             _context.SaveChanges();
         }
 
-        public void Update(PetEntity pet)
+        public void Update(TEntity item)
         {
-            _context.Entry(pet).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public IEnumerable<PetEntity> Find(Func<PetEntity, Boolean> predicate)
+        public IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate)
         {
-            return _context.Pets.Where(predicate).ToList();
+            return _dbSet.Where(predicate).ToList();
         }
 
         public void Delete(int id)
         {
-            PetEntity pet = _context.Pets.Find(id);
-            if (pet != null)
-                _context.Pets.Remove(pet);
+            TEntity item = _dbSet.Find(id);
+            _dbSet.Remove(item);
             _context.SaveChanges();
         }
     }

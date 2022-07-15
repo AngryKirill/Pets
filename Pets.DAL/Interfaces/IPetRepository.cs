@@ -2,13 +2,13 @@
 
 namespace Pets.DAL.Interfaces
 {
-    public interface IPetRepository
+    public interface IPetRepository<TEntity> where TEntity : class
     {
-        IEnumerable<PetEntity> GetAll();
-        PetEntity GetById(int id);
-        IEnumerable<PetEntity> Find(Func<PetEntity, Boolean> predicate);
-        void Create(PetEntity item);
-        void Update(PetEntity item);
+        IEnumerable<TEntity> GetAll();
+        TEntity GetById(int id);
+        IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate);
+        void Create(TEntity item);
+        void Update(TEntity item);
         void Delete(int id);
     }
 }
