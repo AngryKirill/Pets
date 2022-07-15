@@ -2,7 +2,7 @@
 
 namespace Pets.DAL.Interfaces
 {
-    public interface IPetRepository: IGenericRepository<PetEntity>
+    public interface IFoodRepository: IGenericRepository<FoodEntity>
     {
 
     }
