@@ -8,11 +8,12 @@ namespace Pets.BLL.Services
 {
     public class PetService: IPetService
     {
-        private readonly IPetRepository _repository;
+        // It's temporary for project launching
+        private readonly IGenericRepository<PetEntity> _repository;
 
         private readonly IMapper _mapper;
 
-        public PetService(IPetRepository repository, IMapper mapper)
+        public PetService(IGenericRepository<PetEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
