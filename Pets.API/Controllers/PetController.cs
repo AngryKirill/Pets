@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pets.BLL.Interfaces;
 using Pets.API.ViewModel;
 using Pets.BLL.Models;
+using Pets.DAL.Entities;
 
 namespace Pets.API.Controllers
 {
@@ -10,11 +11,12 @@ namespace Pets.API.Controllers
     [ApiController]
     public class PetController : ControllerBase
     {
-        private readonly IPetService _service;
+        //it's temporary
+        private readonly IGenericService<Pet, PetEntity> _service;
 
         private readonly IMapper _mapper;
 
-        public PetController(IPetService service, IMapper mapper)
+        public PetController(IGenericService<Pet, PetEntity> service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
