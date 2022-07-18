@@ -9,6 +9,7 @@ namespace Pets.BLL.Mappers
         public ModelProfile()
         {
             CreateMap<Pet, PetEntity>().ReverseMap();
+            CreateMap<Food, FoodEntity>().ReverseMap();
         }
     }
 }
