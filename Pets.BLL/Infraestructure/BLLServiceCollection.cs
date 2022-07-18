@@ -10,8 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static void AddBLLServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IGenericService<Pet, PetEntity>, GenericService<Pet, PetEntity>>();
-            services.AddScoped<IGenericService<Food, FoodEntity>, GenericService<Food, FoodEntity>>();
+            services.AddScoped<IGenericService<Pet>, GenericService<Pet, PetEntity>>();
+            services.AddScoped<IGenericService<Food>, GenericService<Food, FoodEntity>>();
             services.AddDALServices(configuration);
         }
     }

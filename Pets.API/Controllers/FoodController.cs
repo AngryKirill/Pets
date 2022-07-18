@@ -1,18 +1,17 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Pets.BLL.Interfaces;
 using Pets.API.ViewModel;
+using Pets.BLL.Interfaces;
 using Pets.BLL.Models;
 
 namespace Pets.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PetController : GenericController<PetViewModel, Pet>
+    public class FoodController : GenericController<FoodViewModel, Food>
     {
-        public PetController(IGenericService<Pet> service, IMapper mapper) : base(service, mapper)
+        public FoodController(IGenericService<Food> service, IMapper mapper) : base(service, mapper)
         {
-
         }
     }
 }

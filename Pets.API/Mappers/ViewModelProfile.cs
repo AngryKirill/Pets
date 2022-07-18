@@ -9,6 +9,7 @@ namespace Pets.API.Mappers
         public ViewModelProfile()
         {
             CreateMap<PetViewModel, Pet>().ReverseMap();
+            CreateMap<FoodViewModel, Food>().ReverseMap();
         }
     }
 }

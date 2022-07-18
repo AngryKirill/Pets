@@ -4,7 +4,7 @@ using Pets.DAL.Interfaces;
 
 namespace Pets.BLL.Services
 {
-    public class GenericService<TModel, TEntity> : IGenericService<TModel, TEntity> 
+    public class GenericService<TModel, TEntity> : IGenericService<TModel> 
         where TModel : class
         where TEntity : class
     {

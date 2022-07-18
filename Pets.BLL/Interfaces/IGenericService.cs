@@ -1,8 +1,7 @@
 ﻿namespace Pets.BLL.Interfaces
 {
-    public interface IGenericService<TModel, TEntity> 
+    public interface IGenericService<TModel> 
         where TModel : class
-        where TEntity : class
     {
         IEnumerable<TModel> GetAll();
         TModel GetById(int id);
