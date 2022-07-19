@@ -5,9 +5,11 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pets.API", "Pets.API\Pets.API.csproj", "{8DD07732-4395-4496-9C24-FEE1AB85C0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pets.BLL", "Pets.BLL\Pets.BLL.csproj", "{809E4B0D-46F2-457F-898A-8BAC87DA312F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pets.BLL", "Pets.BLL\Pets.BLL.csproj", "{809E4B0D-46F2-457F-898A-8BAC87DA312F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pets.DAL", "Pets.DAL\Pets.DAL.csproj", "{3A0D12F5-7CA6-473E-8E93-55A839B4A467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pets.DAL", "Pets.DAL\Pets.DAL.csproj", "{3A0D12F5-7CA6-473E-8E93-55A839B4A467}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pets.Tests", "Pets.Tests\Pets.Tests.csproj", "{111855C4-0475-4D02-955E-882E9310D948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3A0D12F5-7CA6-473E-8E93-55A839B4A467}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A0D12F5-7CA6-473E-8E93-55A839B4A467}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A0D12F5-7CA6-473E-8E93-55A839B4A467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111855C4-0475-4D02-955E-882E9310D948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111855C4-0475-4D02-955E-882E9310D948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111855C4-0475-4D02-955E-882E9310D948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111855C4-0475-4D02-955E-882E9310D948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
