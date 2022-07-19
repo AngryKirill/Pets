@@ -17,21 +17,20 @@ namespace Pets.Tests
         [Fact]
         public void GetByIdTest()
         {
+            //Arrange
             var mock = new Mock<IGenericRepository<PetEntity>>();
             mock.Setup(repo => repo.GetById(1)).Returns(GetTestPetById(1));
-            var configModelEntity = new MapperConfiguration(cfg => cfg.CreateMap<Pet, PetEntity>().ReverseMap());
-            var mapperModelEntity = new Mapper(configModelEntity);
-            GenericService<Pet, PetEntity> service = new GenericService<Pet, PetEntity>(mock.Object, mapperModelEntity);
-            var configModelVM = new MapperConfiguration(cfg => cfg.CreateMap<Pet, PetViewModel>().ReverseMap());
-            var mapperModelVM = new Mapper(configModelVM);
-            PetController controller = new PetController(service, mapperModelVM);
+            PetController controller = new PetController(TestPetService.GetPetService(mock.Object),
+                TestMapper.GetPetModelVMMap());
 
+            //Act
             var result = controller.GetById(1);
 
+            //Assert
             result.Name.ShouldBe("Tom");
         }
 
-        private PetEntity GetTestPetById(int id)
+        private static PetEntity GetTestPetById(int id)
         {
             var pets = new List<PetEntity>()
             {
