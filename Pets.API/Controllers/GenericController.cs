@@ -21,37 +21,37 @@ namespace Pets.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TViewModel> GetAll()
+        public async Task<IEnumerable<TViewModel>> GetAll()
         {
-            var allItems = _service.GetAll();
+            var allItems = await _service.GetAll();
             return _mapper.Map<IEnumerable<TModel>, IEnumerable<TViewModel>>(allItems);
         }
 
         [HttpGet("{id}")]
-        public TViewModel GetById(int id)
+        public async Task<TViewModel> GetById(int id)
         {
-            var pet = _service.GetById(id);
+            var pet = await _service.GetById(id);
             return _mapper.Map<TModel, TViewModel>(pet);
         }
 
         [HttpPost]
-        public void Create(TViewModel item)
+        public async Task Create(TViewModel item)
         {
             var newItem = _mapper.Map<TViewModel, TModel>(item);
-            _service.Create(newItem);
+            await _service.Create(newItem);
         }
 
         [HttpPut]
-        public void Update(TViewModel item)
+        public async Task Update(TViewModel item)
         {
             var updateItem = _mapper.Map<TViewModel, TModel>(item);
-            _service.Update(updateItem);
+            await _service.Update(updateItem);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
         }
     }
 }
