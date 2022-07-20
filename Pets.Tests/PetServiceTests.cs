@@ -13,7 +13,7 @@ namespace Pets.Tests
     public class PetServiceTests
     {
         [Fact]
-        public async Task GetById_NameOfPetWhithFirstId_Tom()
+        public async Task GetPetById_ValidId_ReturnsPet()
         {
             //Arrange
             Pet model = TestPetData.GetPetModel();
