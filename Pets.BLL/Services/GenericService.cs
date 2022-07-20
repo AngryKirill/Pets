@@ -18,14 +18,14 @@ namespace Pets.BLL.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<TModel> GetAll()
+        public async Task<IEnumerable<TModel>> GetAll()
         {
-            return _mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(_repository.GetAll());
+            return _mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(await _repository.GetAll());
         }
 
-        public TModel GetById(int id)
+        public async Task<TModel> GetById(int id)
         {
-            TEntity item = _repository.GetById(id);
+            TEntity item = await _repository.GetById(id);
 
             if (item == null)
                 throw new ArgumentNullException("Object doesn't exist");
@@ -39,19 +39,19 @@ namespace Pets.BLL.Services
             return _mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(_repository.Find(newPredicate));
         }
 
-        public void Create(TModel item)
+        public async Task Create(TModel item)
         {
-            _repository.Create(_mapper.Map<TModel, TEntity>(item));
+            await _repository.Create(_mapper.Map<TModel, TEntity>(item));
         }
 
-        public void Update(TModel item)
+        public async Task Update(TModel item)
         {
-            _repository.Update(_mapper.Map<TModel, TEntity>(item));
+            await _repository.Update(_mapper.Map<TModel, TEntity>(item));
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            TEntity pet = _repository.GetById(id);
+            TEntity pet = await _repository.GetById(id);
 
             if (pet == null)
                 throw new ArgumentNullException("Object doesn't exist");

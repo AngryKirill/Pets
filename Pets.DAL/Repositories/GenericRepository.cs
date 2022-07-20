@@ -16,26 +16,26 @@ namespace Pets.DAL.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public async virtual Task<IEnumerable<TEntity>> GetAll()
         {
-            return _dbSet;
+            return await _dbSet.ToListAsync();
         }
 
-        public virtual TEntity GetById(int id)
+        public async virtual Task<TEntity> GetById(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public virtual void Create(TEntity item)
+        public async virtual Task Create(TEntity item)
         {
-            _dbSet.Add(item);
-            _context.SaveChanges();
+            await _dbSet.AddAsync(item);
+            await _context.SaveChangesAsync();
         }
 
-        public virtual void Update(TEntity item)
+        public async virtual Task Update(TEntity item)
         {
             _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public virtual IEnumerable<TEntity> Find(Func<TEntity, Boolean> predicate)
@@ -43,11 +43,11 @@ namespace Pets.DAL.Repositories
             return _dbSet.Where(predicate).ToList();
         }
 
-        public virtual void Delete(int id)
+        public async virtual Task Delete(int id)
         {
-            TEntity item = _dbSet.Find(id);
+            TEntity item = (await _dbSet.FindAsync(id))!;
             _dbSet.Remove(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
